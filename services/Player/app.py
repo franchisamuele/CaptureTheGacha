@@ -49,7 +49,7 @@ app = FastAPI(lifespan=lifespan)
 @app.get('/getCollection')
 async def get_collection(session: SessionDep, token: TokenDep) -> List[CollectionPublic]:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_ID
 
@@ -76,7 +76,7 @@ async def recharge(player_id: int, amount: float, session: SessionDep) -> dict:
 @app.get('/getBalance')
 async def get_balance(session: SessionDep, token: TokenDep) -> dict:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_ID
 	
@@ -90,7 +90,7 @@ async def get_balance(session: SessionDep, token: TokenDep) -> dict:
 @app.get('/getRecharges', response_model=List[RechargePublic])
 async def get_recharges(session: SessionDep, token: TokenDep) -> List[Recharge]:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_ID
 
@@ -111,7 +111,7 @@ def get_random_gacha_id() -> int:
 @app.get('/roll')
 async def roll(session: SessionDep, token: TokenDep) -> dict:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_ID
 
@@ -147,7 +147,7 @@ async def roll(session: SessionDep, token: TokenDep) -> dict:
 @app.get('/getRolls', response_model=List[RollPublic])
 async def get_rolls(session: SessionDep, token: TokenDep) -> List[Roll]:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_ID
 

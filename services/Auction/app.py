@@ -113,7 +113,7 @@ def remove_gacha(session: Session, player_id: int, gacha_id: int) -> None:
 @app.post('/sell')
 async def sell_gacha(auction: AuctionPublic, session: SessionDep, token: TokenDep) -> dict:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_SELLER_ID
 
@@ -159,7 +159,7 @@ def remove_money(session: Session, player_id: int, amount: float) -> None:
 @app.post('/bid/{auction_id}/{bid}')
 async def bid(auction_id: int, bid: float, session: SessionDep, token: TokenDep) -> dict:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_BUYER_ID
 
@@ -213,7 +213,7 @@ async def bid(auction_id: int, bid: float, session: SessionDep, token: TokenDep)
 @app.get('/getAuctions')
 async def get_auctions(session: SessionDep, token: TokenDep) -> list[Auction]:
 	if ENV == 'prod':
-		player_id = validate(token).get('sub')
+		player_id = int( validate(token).get('sub') )
 	else:
 		player_id = MOCK_SELLER_ID
 
