@@ -4,7 +4,7 @@
 source ./load_env.sh
 
 # Bring down any existing Docker containers + volumes
-cd ../../
+cd ../
 docker compose down -v
 # Bring up Docker containers with the latest build
 docker compose up -d --quiet-pull --build
