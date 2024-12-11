@@ -82,8 +82,12 @@ async def bid(auction_id: str, bid: str, request: Request, token: TokenDep) -> d
     return await forward(request, f'https://{AUCTION_HOST}:{PORT}/bid/{auction_id}/{bid}')
 
 @app.get('/getAuctions')
-async def getAuctions(request: Request, token: TokenDep) -> List[Auction]:
+async def getAuctions(request: Request) -> List[Auction]:
     return await forward(request, f'https://{AUCTION_HOST}:{PORT}/getAuctions')
+
+@app.get('/getMyAuctions')
+async def getMyAuctions(request: Request, token: TokenDep) -> List[Auction]:
+    return await forward(request, f'https://{AUCTION_HOST}:{PORT}/getMyAuctions')
 
 # ===== Gacha =====
 

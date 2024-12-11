@@ -40,7 +40,7 @@ npm install -g newman
 Auth service:
 
 ```bash
-cd docs/tests
+cd tests
 ./auth_unit_test.sh
 cd -
 ```
@@ -48,7 +48,7 @@ cd -
 Player service:
 
 ```bash
-cd docs/tests
+cd tests
 ./player_unit_test.sh
 cd -
 ```
@@ -56,7 +56,7 @@ cd -
 Auction service:
 
 ```bash
-cd docs/tests
+cd tests
 ./auction_unit_test.sh
 cd -
 ```
@@ -66,7 +66,7 @@ cd -
 Auth service:
 
 ```bash
-cd docs/tests
+cd tests
 ./auth_integration_test.sh
 cd -
 ```
@@ -74,7 +74,7 @@ cd -
 Player service:
 
 ```bash
-cd docs/tests
+cd tests
 ./player_integration_test.sh
 cd -
 ```
@@ -82,7 +82,7 @@ cd -
 Auction service:
 
 ```bash
-cd docs/tests
+cd tests
 ./auction_integration_test.sh
 cd -
 ```

@@ -210,7 +210,7 @@ async def bid(auction_id: int, bid: float, session: SessionDep, token: TokenDep)
 	session.commit()
 	return { 'message': 'Bid successful' }
 
-@app.get('/getAuctions')
+@app.get('/getMyAuctions')
 async def get_auctions(session: SessionDep, token: TokenDep) -> list[Auction]:
 	if ENV == 'prod':
 		player_id = int( validate(token).get('sub') )
@@ -218,6 +218,11 @@ async def get_auctions(session: SessionDep, token: TokenDep) -> list[Auction]:
 		player_id = MOCK_SELLER_ID
 
 	auctions = session.exec(select(Auction).where((Auction.creator_id == player_id) | (Auction.last_bidder_id == player_id)).order_by(Auction.expiration_timestamp)).all()
+	return auctions
+
+@app.get('/getAuctions')
+async def get_auctions(session: SessionDep) -> list[Auction]:
+	auctions = session.exec(select(Auction).order_by(Auction.expiration_timestamp)).all()
 	return auctions
 
 

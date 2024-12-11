@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - '.github/workflows/main.yml'
-      - 'docs/tests/**'
+      - 'tests/**'
       - 'services/**'
       - 'docker-compose.yml'
 
@@ -38,7 +38,7 @@ jobs:
       
       - name: Run tests
         run: |
-          cd docs/tests
+          cd tests
           ./$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')_unit_test.sh
 
   main:
@@ -67,15 +67,15 @@ jobs:
 
       - name: Run Auth tests
         run: |
-          cd docs/tests
+          cd tests
           ./auth_integration_test.sh
 
       - name: Run Player tests
         run: |
-          cd docs/tests
+          cd tests
           ./player_integration_test.sh
 
       - name: Run Auction tests
         run: |
-          cd docs/tests
+          cd tests
           ./auction_integration_test.sh
