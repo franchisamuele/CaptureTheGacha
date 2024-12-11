@@ -178,7 +178,7 @@ async def logout(token: TokenDep) -> dict:
      
 @app.patch('/editAccount')
 async def edit_account(new_player: PatchUser, session: SessionDep, token: TokenDep) -> dict:
-    player_id = validate(token)['sub']
+    player_id = int( validate(token).get('sub') )
 
     if not new_player.username and not new_player.password:
         raise HTTPException(status_code=400, detail='No fields to update')
@@ -219,7 +219,7 @@ async def edit_account(new_player: PatchUser, session: SessionDep, token: TokenD
 
 @app.delete('/deleteAccount')
 async def delete_account(token: TokenDep, session: SessionDep) -> dict:
-    player_id = validate(token)['sub']
+    player_id = int( validate(token).get('sub') )
 
     query = select(User).where(User.id == player_id)
     player = session.exec(query).first()
