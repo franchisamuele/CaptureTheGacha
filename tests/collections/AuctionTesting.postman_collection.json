@@ -284,12 +284,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getAuctions",
+					"raw": "{{base_url}}/getMyAuctions",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getAuctions"
+						"getMyAuctions"
 					]
 				}
 			},
