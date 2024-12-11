@@ -13,8 +13,7 @@
   - [1. Introduction](#1-introduction)
   - [2. Gacha Overview](#2-gacha-overview)
     - [2.1 Description](#21-description)
-    - [2.2 Rarities and Probabilities](#22-rarities-and-probabilities)
-    - [2.3 Our Gachas](#23-our-gachas)
+    - [2.2 Our Gachas](#22-our-gachas)
   - [3. Architecture](#3-architecture)
     - [3.1 Overview](#31-overview)
     - [3.2 Microservices](#32-microservices)
@@ -61,26 +60,15 @@ The system provides the following core functionalities:
 
 In our system, a **Gacha** represents a collectible item that players can obtain through rolls, which are random draws. Each Gacha has an associated name, rarity, and image, and is uniquely identified by an ID to distinguish it from other Gachas.
 
-### 2.2 Rarities and Probabilities
+### 2.2 Our Gachas
 
-The Gachas are categorized into four rarities, each with a specific probability of being obtained through rolls:
-
-| Rarity    | Probability |
-|-----------|-------------|
-| Common    | 50%         |
-| Rare      | 30%         |
-| Epic      | 15%         |
-| Legendary | 5%          |
-
-### 2.3 Our Gachas
-
-![Gachas](gachas.png)
+![Gachas](images/gachas.png)
 
 ---
 
 ## 3. Architecture
 
-![Architecture](./architecture.png)
+![Architecture](images/architecture.png)
 
 ### 3.1 Overview
 
@@ -301,11 +289,11 @@ The README.md file in the project root contains instructions on how to run both 
 We ran performance tests with Locust against the player endpoints that handle gacha operations. By hitting these endpoints with a large number of requests, we confirmed that the rarity distribution of gacha rolls stayed within the expected ranges and that the endpoints performed well.
 Access to player features requires authentication, so we had to secure every request with a valid JSON Web Token (JWT). To get the token, we used the /login endpoint and provided a username and password.
 
-![Locust Chart](locust_charts.png)
+![Locust Chart](images/locust_charts.png)
 
 Our tests focused on the /roll endpoint, verifying that the rarities matched the distribution described in Section 2.2.
 Overall, the system proved both efficient and scalable, easily handling a large number of concurrent requests. After an initial spike, the system maintained a steady rate of requests per second, represented by the green line. No failures occurred during the test, which would have shown up as a red line if they had happened. When stopping the test, the distribution of the the rarities get displayed in the logs.
-![Locust Logs](locus_logs.png)
+![Locust Logs](images/locus_logs.png)
 
 ---
 
@@ -357,7 +345,7 @@ The system uses a distributed approach for authorization and authentication. Ins
 - **Command Used**: `docker-compose run bandit`
 - **Implementation**: Created a service in the `docker-compose` file under the `security` profile, which uses a Python 3.9 image and runs `bandit` recursively on all services. As you can see, it shows 13 high-severity issues and 6 medium-severity issues. However, they only relate to the use of self-signed certificates and the binding of the services to all interfaces, which is not a problem since they're running under the docker compose network.
 
-![Bandit Results](bandit_results.png)
+![Bandit Results](images/bandit_results.png)
 
 ### Pip-Audit
 
@@ -366,14 +354,14 @@ The system uses a distributed approach for authorization and authentication. Ins
 - **Implementation**: Created a service in the `docker-compose` file under the `security` profile, which uses a Python 3.9 image and runs `pip-audit` recursively on all services. It identifies outdated or vulnerable Python packages and reports potential security issues, along with guidance on how to address them.
 - **Results**: The scan of each service did not uncover any vulnerabilities.
 
-![Pip-Audit Results](pip-audit_results.png)
+![Pip-Audit Results](images/pip-audit_results.png)
 
 ### Docker Image Vulnerabilities
 
 - **Tool Used**: Docker Scout
 - **Results**: Docker Scout was used to scan the Docker images associated with the project. It detects vulnerabilities in base images, identifies outdated dependencies, and provides actionable steps to resolve these issues by suggesting safer versions or alternative images. No image analyzed by Docker Scout has now either high or critical vulnerabilities.
 
-![Docker Scout Results](docker_scout_results.png)
+![Docker Scout Results](images/docker_scout_results.png)
 
 ### GitHub Dependabot
 
