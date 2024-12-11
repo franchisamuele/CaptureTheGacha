@@ -16,12 +16,6 @@ jobs:
     strategy:
       matrix:
         service: [Auth, Player, Auction]
-    if: |
-      github.event_name == 'push' && (
-        contains(github.event.head_commit.modified, '.github/workflows/main.yml') ||
-        contains(github.event.head_commit.modified, 'docs/tests/') ||
-        contains(github.event.head_commit.modified, 'services/${{ matrix.service }}')
-      )
     steps:  
       - name: Checkout code
         uses: actions/checkout@v4
