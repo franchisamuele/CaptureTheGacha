@@ -39,7 +39,7 @@ jobs:
       - name: Run tests
         run: |
           cd docs/tests
-          ./${{ matrix.service | toLowerCase }}_unit_test.sh
+          ./$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')_unit_test.sh
 
   main:
     runs-on: ubuntu-latest
