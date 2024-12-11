@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load environment variables from .env file
-export $(grep -v '^#' ../../.env | grep -v '^\s*$' | xargs)
+source ./load_env.sh
 
 # Bring down any existing Docker containers + volumes
 cd ../../
