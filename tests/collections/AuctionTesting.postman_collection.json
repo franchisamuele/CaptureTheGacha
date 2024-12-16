@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "95e4b37c-99b2-422d-ab97-32b8672bf104",
+		"_postman_id": "671d2794-3421-4011-9e25-d2e90705ab48",
 		"name": "AuctionTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39700120",
-		"_collection_link": "https://capture-the-gacha.postman.co/workspace/GachaWorld~a421580f-4860-4d37-aadd-e6e959d8a5f1/collection/39700120-95e4b37c-99b2-422d-ab97-32b8672bf104?action=share&source=collection_link&creator=39700120"
+		"_exporter_id": "39700120"
 	},
 	"item": [
 		{
@@ -284,12 +283,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getMyAuctions",
+					"raw": "{{base_url}}/",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getMyAuctions"
+						""
 					]
 				}
 			},

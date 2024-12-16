@@ -11,7 +11,7 @@ docker compose up -d --quiet-pull --build
 
 # Wait for API readiness
 cd ../../tests
-api_host="https://localhost:5000/openapi.json"
+api_host="https://localhost/openapi.json"
 sleep 3
 ./wait.sh $api_host
 

@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "778099b8-129b-461e-b518-0fee84160cc3",
-		"name": "AuthTesting",
+		"_postman_id": "339e8f26-2ef3-4393-84b6-0cecea8edbd5",
+		"name": "AuthIntegrationTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39700120",
-		"_collection_link": "https://capture-the-gacha.postman.co/workspace/GachaWorld~a421580f-4860-4d37-aadd-e6e959d8a5f1/collection/39700120-778099b8-129b-461e-b518-0fee84160cc3?action=share&source=collection_link&creator=39700120"
+		"_exporter_id": "39700120"
 	},
 	"item": [
 		{
@@ -36,11 +35,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -76,11 +76,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -116,11 +117,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -156,11 +158,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -203,11 +206,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -250,11 +254,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -290,11 +295,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -330,11 +336,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -371,11 +378,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/logout",
+					"raw": "{{base_url}}/auth/logout",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"logout"
 					]
 				}
@@ -405,11 +413,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/logout",
+					"raw": "{{base_url}}/auth/logout",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"logout"
 					]
 				}
@@ -446,11 +455,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/logout",
+					"raw": "{{base_url}}/auth/logout",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"logout"
 					]
 				}
@@ -496,11 +506,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/editAccount",
+					"raw": "{{base_url}}/auth/editAccount",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"editAccount"
 					]
 				}
@@ -546,11 +557,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -596,11 +608,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -646,11 +659,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/editAccount",
+					"raw": "{{base_url}}/auth/editAccount",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"editAccount"
 					]
 				}
@@ -696,11 +710,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -746,11 +761,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -787,11 +803,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/deleteAccount",
+					"raw": "{{base_url}}/auth/deleteAccount",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"deleteAccount"
 					]
 				}
@@ -828,11 +845,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/deleteAccount",
+					"raw": "{{base_url}}/auth/deleteAccount",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"deleteAccount"
 					]
 				}
@@ -871,11 +889,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -911,11 +930,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -951,11 +971,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}

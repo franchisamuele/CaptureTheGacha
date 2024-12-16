@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d071090f-04c6-47a4-9936-b521e9c8ffdc",
+		"_postman_id": "df9dcc18-aafc-4375-85af-1f167e9f4343",
 		"name": "PlayerIntegrationTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39700120",
-		"_collection_link": "https://capture-the-gacha.postman.co/workspace/GachaWorld~a421580f-4860-4d37-aadd-e6e959d8a5f1/collection/39700120-d071090f-04c6-47a4-9936-b521e9c8ffdc?action=share&source=collection_link&creator=39700120"
+		"_exporter_id": "39700120"
 	},
 	"item": [
 		{
@@ -36,11 +35,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -83,11 +83,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -124,11 +125,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/roll",
+					"raw": "{{base_url}}/players/roll",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"players",
 						"roll"
 					]
 				}
@@ -167,12 +169,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/players/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"players",
+						"collection"
 					]
 				}
 			},
@@ -208,11 +211,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/recharge/1/999999",
+					"raw": "{{base_url}}/players/recharge/1/999999",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"players",
 						"recharge",
 						"1",
 						"999999"
@@ -253,12 +257,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getBalance",
+					"raw": "{{base_url}}/players/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getBalance"
+						"players",
+						"balance"
 					]
 				}
 			},
@@ -294,11 +299,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/roll",
+					"raw": "{{base_url}}/players/roll",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"players",
 						"roll"
 					]
 				}
@@ -337,12 +343,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/players/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"players",
+						"collection"
 					]
 				}
 			},
@@ -380,12 +387,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getRolls",
+					"raw": "{{base_url}}/players/rolls",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getRolls"
+						"players",
+						"rolls"
 					]
 				}
 			},

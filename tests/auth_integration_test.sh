@@ -11,13 +11,13 @@ docker compose up -d --quiet-pull --build
 
 # Wait for API readiness
 cd tests
-api_host="https://localhost:5000/openapi.json"
+api_host="https://localhost/health"
 sleep 3
 ./wait.sh $api_host
 
 # Run Newman tests
 cd collections
-newman run AuthTesting.postman_collection.json -e environment.postman_globals.json --insecure
+newman run AuthIntegrationTesting.postman_collection.json -e environment.postman_globals.json --insecure
 NEWMAN_EXIT_CODE=$?
 
 # Bring down Docker containers after tests

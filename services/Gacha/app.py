@@ -1,22 +1,14 @@
-import os
-import random
-import shutil
-import uuid
+import os, random, jwt, uvicorn, httpx, urllib3
 from contextlib import asynccontextmanager
 from typing import Annotated, Union
-
-import jwt
-import uvicorn
-import httpx
-import urllib3
 from connection import engine
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, Form, HTTPException, UploadFile
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.staticfiles import StaticFiles
-from model import Gacha, SessionDep, create_db_and_tables, get_session
+from model import Gacha, SessionDep, create_db_and_tables
 from PIL import Image
-from sqlmodel import Session, select
+from sqlmodel import select
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 ENV = os.getenv('ENV', 'prod')
@@ -75,12 +67,12 @@ TokenDep = Annotated[str, Depends(oauth2_scheme)]
 
 # ===== EVERYONE =====
 
-@app.get('/gachas')
-async def get_gachas(token: TokenDep, session: SessionDep):
+@app.get('/collection')
+async def get_gachas(session: SessionDep):
     gachas = session.exec(select(Gacha)).all()
     return [gacha.dict() for gacha in gachas]
 
-@app.get('/gachas/{gacha_id}')
+@app.get('/collection/{gacha_id}')
 async def get_gacha(gacha_id: int, token: TokenDep, session: SessionDep):
     gacha = session.get(Gacha, gacha_id)
     if not gacha:
@@ -89,7 +81,7 @@ async def get_gacha(gacha_id: int, token: TokenDep, session: SessionDep):
 
 # ===== ADMIN =====
 
-@app.post('/gachas')
+@app.post('/collection')
 async def add_gacha(name: Annotated[str, Form()], rarity: Annotated[str, Form()], token: TokenDep, session: SessionDep, image: UploadFile):
     payload = validate(token)
     role = payload.get('role')
@@ -103,7 +95,7 @@ async def add_gacha(name: Annotated[str, Form()], rarity: Annotated[str, Form()]
     session.commit()
     return { 'message': 'Gacha added successfully', 'gacha_id': gacha.id }
 
-@app.put('/gachas/{gacha_id}')
+@app.put('/collection/{gacha_id}')
 async def update_gacha(gacha_id: int, token: TokenDep, session: SessionDep, image: UploadFile | None = None, name: Annotated[Union[str, None], Form()] = None, rarity: Annotated[Union[str, None], Form()] = None):
     payload = validate(token)
     role = payload.get('role')
@@ -127,7 +119,7 @@ async def update_gacha(gacha_id: int, token: TokenDep, session: SessionDep, imag
     session.commit()
     return {'message': 'Gacha updated successfully'}
 
-@app.delete('/gachas/{gacha_id}')
+@app.delete('/collection/{gacha_id}')
 async def delete_gacha(gacha_id: int, token: TokenDep, session: SessionDep):
     payload = validate(token)
     role = payload.get('role')
@@ -138,7 +130,7 @@ async def delete_gacha(gacha_id: int, token: TokenDep, session: SessionDep):
         raise HTTPException(status_code=404, detail='Gacha not found')
     
     # Delete all gachas from users collections
-    response = httpx.delete(f'https://{PLAYER_HOST}:{PORT}/deleteGacha/{gacha_id}', verify=False, timeout=TIMEOUT)
+    response = httpx.delete(f'https://{PLAYER_HOST}:{PORT}/{gacha_id}', verify=False, timeout=TIMEOUT)
     if not response.is_success:
         raise HTTPException(status_code=400, detail='Error deleting gacha from users collections')
 

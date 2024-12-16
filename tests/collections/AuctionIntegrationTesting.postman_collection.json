@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "adc34448-70cf-45fc-aa74-6756038b1040",
+		"_postman_id": "0c5609c2-d3a2-4025-a01d-db3acd62e64e",
 		"name": "AuctionIntegrationTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39700120",
-		"_collection_link": "https://capture-the-gacha.postman.co/workspace/GachaWorld~a421580f-4860-4d37-aadd-e6e959d8a5f1/collection/39700120-adc34448-70cf-45fc-aa74-6756038b1040?action=share&source=collection_link&creator=39700120"
+		"_exporter_id": "39700120"
 	},
 	"item": [
 		{
@@ -36,11 +35,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -76,11 +76,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -116,11 +117,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/register",
+					"raw": "{{base_url}}/auth/register",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"register"
 					]
 				}
@@ -163,11 +165,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -210,11 +213,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -257,11 +261,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/login",
+					"raw": "{{base_url}}/auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auth",
 						"login"
 					]
 				}
@@ -298,14 +303,15 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/recharge/1/500",
+					"raw": "{{base_url}}/players/recharge/1/1500",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"players",
 						"recharge",
 						"1",
-						"500"
+						"1500"
 					]
 				}
 			},
@@ -341,11 +347,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/roll",
+					"raw": "{{base_url}}/players/roll",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"players",
 						"roll"
 					]
 				}
@@ -391,12 +398,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/players/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"players",
+						"collection"
 					]
 				}
 			},
@@ -441,11 +449,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/sell",
+					"raw": "{{base_url}}/auctions/sell",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"sell"
 					]
 				}
@@ -491,11 +500,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/sell",
+					"raw": "{{base_url}}/auctions/sell",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"sell"
 					]
 				}
@@ -541,11 +551,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/sell",
+					"raw": "{{base_url}}/auctions/sell",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"sell"
 					]
 				}
@@ -608,11 +619,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/sell",
+					"raw": "{{base_url}}/auctions/sell",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"sell"
 					]
 				}
@@ -650,12 +662,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/players/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"players",
+						"collection"
 					]
 				}
 			},
@@ -691,11 +704,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/bid/1/100",
+					"raw": "{{base_url}}/auctions/bid/1/100",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"bid",
 						"1",
 						"100"
@@ -734,11 +748,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/bid/1/100",
+					"raw": "{{base_url}}/auctions/bid/1/100",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"bid",
 						"1",
 						"100"
@@ -777,11 +792,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/recharge/2/100",
+					"raw": "{{base_url}}/players/recharge/2/100",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"players",
 						"recharge",
 						"2",
 						"100"
@@ -820,11 +836,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/recharge/3/200",
+					"raw": "{{base_url}}/players/recharge/3/200",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"players",
 						"recharge",
 						"3",
 						"200"
@@ -863,11 +880,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/bid/1/100",
+					"raw": "{{base_url}}/auctions/bid/1/100",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"bid",
 						"1",
 						"100"
@@ -911,12 +929,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getMyAuctions",
+					"raw": "{{base_url}}/auctions/personal",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getMyAuctions"
+						"auctions",
+						"personal"
 					]
 				}
 			},
@@ -954,12 +973,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getBalance",
+					"raw": "{{base_url}}/players/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getBalance"
+						"players",
+						"balance"
 					]
 				}
 			},
@@ -995,11 +1015,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/bid/1/100",
+					"raw": "{{base_url}}/auctions/bid/1/100",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"bid",
 						"1",
 						"100"
@@ -1040,12 +1061,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getBalance",
+					"raw": "{{base_url}}/players/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getBalance"
+						"players",
+						"balance"
 					]
 				}
 			},
@@ -1081,11 +1103,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/bid/1/200",
+					"raw": "{{base_url}}/auctions/bid/1/200",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
+						"auctions",
 						"bid",
 						"1",
 						"200"
@@ -1129,12 +1152,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getMyAuctions",
+					"raw": "{{base_url}}/auctions/personal",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getMyAuctions"
+						"auctions",
+						"personal"
 					]
 				}
 			},
@@ -1172,12 +1196,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getBalance",
+					"raw": "{{base_url}}/players/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getBalance"
+						"players",
+						"balance"
 					]
 				}
 			},
@@ -1215,12 +1240,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getBalance",
+					"raw": "{{base_url}}/players/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getBalance"
+						"players",
+						"balance"
 					]
 				}
 			},
@@ -1279,12 +1305,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/players/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"players",
+						"collection"
 					]
 				}
 			},
@@ -1299,7 +1326,7 @@
 						"exec": [
 							"pm.test(\"Sold the gacha (200)\", function () {",
 							"    pm.response.to.have.status(200);",
-							"    pm.expect(pm.response.json().balance).to.equal(200);",
+							"    pm.expect(pm.response.json().balance).to.equal(1200);",
 							"});",
 							""
 						],
@@ -1322,12 +1349,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getBalance",
+					"raw": "{{base_url}}/players/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getBalance"
+						"players",
+						"balance"
 					]
 				}
 			},
@@ -1364,12 +1392,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/players/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"players",
+						"collection"
 					]
 				}
 			},
@@ -1406,12 +1435,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/players/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"players",
+						"collection"
 					]
 				}
 			},

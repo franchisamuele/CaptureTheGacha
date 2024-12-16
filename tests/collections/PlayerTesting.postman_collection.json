@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9b05eba7-0c38-4d85-82db-cb07df604ed5",
+		"_postman_id": "096b4527-8145-4c08-96f9-f37eb97a998d",
 		"name": "PlayerTesting",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39700120",
-		"_collection_link": "https://capture-the-gacha.postman.co/workspace/GachaWorld~a421580f-4860-4d37-aadd-e6e959d8a5f1/collection/39700120-9b05eba7-0c38-4d85-82db-cb07df604ed5?action=share&source=collection_link&creator=39700120"
+		"_exporter_id": "39700120"
 	},
 	"item": [
 		{
@@ -30,12 +29,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/newPlayer/{{username}}",
+					"raw": "{{base_url}}/accounts/{{username}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"newPlayer",
+						"accounts",
 						"{{username}}"
 					]
 				}
@@ -95,12 +94,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"collection"
 					]
 				}
 			},
@@ -161,12 +160,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getBalance",
+					"raw": "{{base_url}}/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getBalance"
+						"balance"
 					]
 				}
 			},
@@ -225,12 +224,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"collection"
 					]
 				}
 			},
@@ -256,12 +255,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/transferGacha/{{player_id}}/1234",
+					"raw": "{{base_url}}/giftGacha/{{player_id}}/1234",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"transferGacha",
+						"giftGacha",
 						"{{player_id}}",
 						"1234"
 					]
@@ -291,12 +290,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getRolls",
+					"raw": "{{base_url}}/rolls",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getRolls"
+						"rolls"
 					]
 				}
 			},
@@ -331,12 +330,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/getCollection",
+					"raw": "{{base_url}}/collection",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"getCollection"
+						"collection"
 					]
 				}
 			},

@@ -46,7 +46,7 @@ async def lifespan(_app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-@app.get('/getCollection')
+@app.get('/collection')
 async def get_collection(session: SessionDep, token: TokenDep) -> List[CollectionPublic]:
 	if ENV == 'prod':
 		player_id = int( validate(token).get('sub') )
@@ -73,7 +73,7 @@ async def recharge(player_id: int, amount: float, session: SessionDep) -> dict:
 	session.commit()
 	return { 'message': 'Recharge successful' }
 
-@app.get('/getBalance')
+@app.get('/balance')
 async def get_balance(session: SessionDep, token: TokenDep) -> dict:
 	if ENV == 'prod':
 		player_id = int( validate(token).get('sub') )
@@ -87,7 +87,7 @@ async def get_balance(session: SessionDep, token: TokenDep) -> dict:
 		raise HTTPException(status_code=404, detail='Player not found')
 	return { 'balance': player.balance }
 
-@app.get('/getRecharges', response_model=List[RechargePublic])
+@app.get('/recharges', response_model=List[RechargePublic])
 async def get_recharges(session: SessionDep, token: TokenDep) -> List[Recharge]:
 	if ENV == 'prod':
 		player_id = int( validate(token).get('sub') )
@@ -144,7 +144,7 @@ async def roll(session: SessionDep, token: TokenDep) -> dict:
 	session.commit()
 	return { 'gacha_id': gacha_id }
 
-@app.get('/getRolls', response_model=List[RollPublic])
+@app.get('/rolls', response_model=List[RollPublic])
 async def get_rolls(session: SessionDep, token: TokenDep) -> List[Roll]:
 	if ENV == 'prod':
 		player_id = int( validate(token).get('sub') )
@@ -160,8 +160,8 @@ async def get_rolls(session: SessionDep, token: TokenDep) -> List[Roll]:
 # === AUCTION API ===
 # ===================
 
-@app.post('/placeBid/{player_id}/{bid}')
-async def place_bid(player_id: int, bid: float, session: SessionDep) -> dict:
+@app.post('/removeMoney/{player_id}/{bid}')
+async def remove_money(player_id: int, bid: float, session: SessionDep) -> dict:
 	if bid <= 0:
 		raise HTTPException(status_code=400, detail='Bid must be positive')
 
@@ -178,8 +178,8 @@ async def place_bid(player_id: int, bid: float, session: SessionDep) -> dict:
 	session.commit()
 	return { 'message': 'Bid successful' }
 
-@app.post('/refundBid/{player_id}/{bid}')
-async def refund_bid(player_id: int, bid: float, session: SessionDep) -> dict:
+@app.post('/giftMoney/{player_id}/{bid}')
+async def gift_money(player_id: int, bid: float, session: SessionDep) -> dict:
 	if bid <= 0:
 		raise HTTPException(status_code=400, detail='Bid must be positive')
 
@@ -193,8 +193,8 @@ async def refund_bid(player_id: int, bid: float, session: SessionDep) -> dict:
 	session.commit()
 	return { 'message': 'Bid refunded' }
 
-@app.post('/sellGacha/{player_id}/{gacha_id}')
-async def sell_gacha(player_id: int, gacha_id: int, session: SessionDep) -> dict:
+@app.post('/removeGacha/{player_id}/{gacha_id}')
+async def remove_gacha(player_id: int, gacha_id: int, session: SessionDep) -> dict:
 	query = select(Collection).where(Collection.player_id == player_id, Collection.gacha_id == gacha_id)
 	entry = session.exec(query).first()
 
@@ -207,8 +207,8 @@ async def sell_gacha(player_id: int, gacha_id: int, session: SessionDep) -> dict
 	session.commit()
 	return { 'message': 'Gacha sold' }
 
-@app.post('/transferGacha/{player_id}/{gacha_id}')
-async def transfer_gacha(player_id: int, gacha_id: int, session: SessionDep) -> dict:
+@app.post('/giftGacha/{player_id}/{gacha_id}')
+async def gift_gacha(player_id: int, gacha_id: int, session: SessionDep) -> dict:
 	query = select(Collection).where(Collection.player_id == player_id, Collection.gacha_id == gacha_id)
 	entry = session.exec(query).first()
 
@@ -226,7 +226,7 @@ async def transfer_gacha(player_id: int, gacha_id: int, session: SessionDep) -> 
 # === AUTH API ===
 # ================
 
-@app.post('/newPlayer/{username}', status_code=201)
+@app.post('/accounts/{username}', status_code=201)
 async def create_account(username: str, session: SessionDep) -> dict:
 	query = select(Player).where(Player.username == username)
 	if session.exec(query).first():
@@ -237,7 +237,7 @@ async def create_account(username: str, session: SessionDep) -> dict:
 	session.commit()
 	return { 'player_id': player.id }
 
-@app.patch('/editPlayer/{old_username}/{new_username}', status_code=204)
+@app.patch('/accounts/{old_username}/{new_username}', status_code=204)
 async def edit_account(old_username: str, new_username: str, session: SessionDep) -> None:
 	# Check if username exists
 	query = select(Player).where(Player.username == old_username)
@@ -253,7 +253,7 @@ async def edit_account(old_username: str, new_username: str, session: SessionDep
 	player.username = new_username
 	session.commit()
 
-@app.delete('/deletePlayer/{username}', status_code=204)
+@app.delete('/accounts/{username}', status_code=204)
 async def delete_account(username: str, session: SessionDep) -> None:
 	# Check if username exists
 	query = select(Player).where(Player.username == username)
@@ -268,7 +268,7 @@ async def delete_account(username: str, session: SessionDep) -> None:
 # === GACHA API ===
 # =================
 
-@app.delete('/deleteGacha/{gacha_id}', status_code=204)
+@app.delete('/collections/{gacha_id}', status_code=204)
 async def delete_gacha(gacha_id: int, session: SessionDep) -> None:
 	query = select(Collection).where(Collection.gacha_id == gacha_id)
 	entries = session.exec(query).all()

@@ -92,6 +92,5 @@ cd -
 Run `bandit` and `pip-audit` using `docker-compose`:
 
 ```bash
-docker compose run --rm bandit
-docker compose run --rm pip-audit
+# TODO
 ```

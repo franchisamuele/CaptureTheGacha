@@ -59,7 +59,7 @@ def create_player(username: str) -> str:
         MOCK_ID += 1
         return MOCK_ID
 
-    response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/newPlayer/{username}', verify=False, timeout=TIMEOUT)
+    response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/accounts/{username}', verify=False, timeout=TIMEOUT)
     if response.status_code != 201:
         raise HTTPException(status_code=400, detail=f'Username "{username}" is already taken')
     
@@ -69,7 +69,7 @@ def delete_player(username: str):
     if ENV == 'test':
         return
 
-    response = httpx.delete(f'https://{PLAYER_HOST}:{PORT}/deletePlayer/{username}', verify=False, timeout=TIMEOUT)
+    response = httpx.delete(f'https://{PLAYER_HOST}:{PORT}/accounts/{username}', verify=False, timeout=TIMEOUT)
     if response.status_code != 204:
         raise HTTPException(status_code=404, detail='Player not found')
 
@@ -77,7 +77,7 @@ def edit_player(old_username: str, new_username: str):
     if ENV == 'test':
         return
 
-    response = httpx.patch(f'https://{PLAYER_HOST}:{PORT}/editPlayer/{old_username}/{new_username}', verify=False, timeout=TIMEOUT)
+    response = httpx.patch(f'https://{PLAYER_HOST}:{PORT}/accounts/{old_username}/{new_username}', verify=False, timeout=TIMEOUT)
     if response.status_code != 204:
         raise HTTPException(status_code=404, detail='Player not found')
 

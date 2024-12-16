@@ -80,7 +80,7 @@ def close_auction(auction_id: int) -> None:
 
 		# If no one bid, return the gacha
 		if auction.last_bidder_id is None:
-			response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/transferGacha/{auction.creator_id}/{auction.gacha_id}', verify=False, timeout=TIMEOUT)
+			response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/removeGacha/{auction.creator_id}/{auction.gacha_id}', verify=False, timeout=TIMEOUT)
 			if not response.is_success:
 				return
 			auction.is_closed = True
@@ -90,11 +90,11 @@ def close_auction(auction_id: int) -> None:
 
 		# ! Consistency problems, what if one fails
 		# If someone bid transfer the bid amount to the creator
-		response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/refundBid/{auction.creator_id}/{auction.highest_bid}', verify=False, timeout=TIMEOUT)
+		response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/giftMoney/{auction.creator_id}/{auction.highest_bid}', verify=False, timeout=TIMEOUT)
 		if not response.is_success:
 			return
 		# And transfer the gacha
-		response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/transferGacha/{auction.last_bidder_id}/{auction.gacha_id}', verify=False, timeout=TIMEOUT)
+		response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/giftGacha/{auction.last_bidder_id}/{auction.gacha_id}', verify=False, timeout=TIMEOUT)
 		if not response.is_success:
 			return
 		auction.is_closed = True
@@ -105,7 +105,7 @@ def close_auction(auction_id: int) -> None:
 
 
 def remove_gacha(session: Session, player_id: int, gacha_id: int) -> None:
-	response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/sellGacha/{player_id}/{gacha_id}', verify=False, timeout=TIMEOUT)
+	response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/removeGacha/{player_id}/{gacha_id}', verify=False, timeout=TIMEOUT)
 	if not response.is_success:
 		session.rollback()
 		raise HTTPException(status_code=404, detail='Player not found or does not have the gacha')
@@ -145,13 +145,13 @@ async def sell_gacha(auction: AuctionPublic, session: SessionDep, token: TokenDe
 
 
 def gift_money(session: Session, player_id: int, amount: float) -> None:
-	response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/refundBid/{player_id}/{amount}', verify=False, timeout=TIMEOUT)
+	response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/giftMoney/{player_id}/{amount}', verify=False, timeout=TIMEOUT)
 	if not response.is_success:
 		session.rollback()
 		raise HTTPException(status_code=404, detail='Previous bidder not found')
 	
 def remove_money(session: Session, player_id: int, amount: float) -> None:
-	response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/placeBid/{player_id}/{amount}', verify=False, timeout=TIMEOUT)
+	response = httpx.post(f'https://{PLAYER_HOST}:{PORT}/removeMoney/{player_id}/{amount}', verify=False, timeout=TIMEOUT)
 	if not response.is_success:
 		session.rollback()
 		raise HTTPException(status_code=400, detail='Player not found or does not have enough balance')
@@ -210,8 +210,8 @@ async def bid(auction_id: int, bid: float, session: SessionDep, token: TokenDep)
 	session.commit()
 	return { 'message': 'Bid successful' }
 
-@app.get('/getMyAuctions')
-async def get_auctions(session: SessionDep, token: TokenDep) -> list[Auction]:
+@app.get('/personal')
+async def get_my_auctions(session: SessionDep, token: TokenDep) -> list[Auction]:
 	if ENV == 'prod':
 		player_id = int( validate(token).get('sub') )
 	else:
@@ -220,7 +220,7 @@ async def get_auctions(session: SessionDep, token: TokenDep) -> list[Auction]:
 	auctions = session.exec(select(Auction).where((Auction.creator_id == player_id) | (Auction.last_bidder_id == player_id)).order_by(Auction.expiration_timestamp)).all()
 	return auctions
 
-@app.get('/getAuctions')
+@app.get('/')
 async def get_auctions(session: SessionDep) -> list[Auction]:
 	auctions = session.exec(select(Auction).order_by(Auction.expiration_timestamp)).all()
 	return auctions

@@ -12,8 +12,6 @@ services:
       - source: player-key
         target: key
       - jwt-public-key
-    networks:
-      - private
 
   player-db:
     image: mysql:8-oracle
@@ -40,8 +38,7 @@ services:
       --ssl-cert=${CERT_PATH}
       --ssl-key=${KEY_PATH}
       --require_secure_transport=ON
-    networks:
-      - private
+
 
   auction:
     hostname: ${AUCTION_HOST}
@@ -57,8 +54,6 @@ services:
       - source: auction-key
         target: key
       - jwt-public-key
-    networks:
-      - private
 
   auction-db:
     image: mysql:8-oracle
@@ -85,54 +80,7 @@ services:
       --ssl-cert=${CERT_PATH}
       --ssl-key=${KEY_PATH}
       --require_secure_transport=ON
-    networks:
-      - private
 
-  api-gateway:
-    hostname: ${API_GATEWAY_HOST}
-    build:
-      context: .
-      dockerfile: ./services/Gateway/Dockerfile
-    depends_on:
-      - player
-      - auction
-      - auth
-      - gacha
-    ports:
-      - '5000:5000'
-    env_file: .env
-    secrets:
-      - source: gateway-cert
-        target: cert
-      - source: gateway-key
-        target: key
-    healthcheck:
-      test: curl -f https://${PLAYER_HOST}:5000 && curl -f https://${AUCTION_HOST}:5000
-      interval: 10s
-      retries: 10
-      start_period: 30s
-      timeout: 10s
-    networks:
-      - public
-      - private
-
-  api-gateway-admin:
-    hostname: ${API_GATEWAY_ADMIN_HOST}
-    build: ./services/AdminGateway
-    depends_on:
-      - auth
-      - gacha
-    restart: always
-    ports:
-      - "5001:5001"
-    env_file: .env
-    secrets:
-      - source: admin-gateway-cert
-        target: cert
-      - source: admin-gateway-key
-        target: key
-    networks:
-      - private
 
   auth:
     hostname: ${AUTH_HOST}
@@ -148,8 +96,6 @@ services:
         target: key
       - jwt-public-key
       - jwt-private-key
-    networks:
-      - private
 
   auth-db:
     image: mysql:8-oracle
@@ -176,8 +122,7 @@ services:
       --ssl-cert=${CERT_PATH}
       --ssl-key=${KEY_PATH}
       --require_secure_transport=ON
-    networks:
-      - private
+
 
   gacha:
     hostname: ${GACHA_HOST}
@@ -194,8 +139,6 @@ services:
       - source: gacha-key
         target: key
       - jwt-public-key
-    networks:
-      - private
 
   gacha-db:
     image: mysql:8-oracle
@@ -222,32 +165,27 @@ services:
       --ssl-cert=${CERT_PATH}
       --ssl-key=${KEY_PATH}
       --require_secure_transport=ON
-    networks:
-      - private
 
-  bandit:
-    image: python:3.12-slim
-    volumes:
-      - ./:/app
-    working_dir: /app
-    command: >
-      sh -c "pip install bandit && bandit -r ./services"
-    networks:
-      - private
-    profiles:
-      - security
 
-  pip-audit:
-    image: python:3.12-slim
+  nginx:
+    image: nginx:alpine
+    depends_on:
+      - player
+      - auction
+      - auth
+      - gacha
     volumes:
-      - ./services:/app/services
-    working_dir: /app
-    command: >
-      sh -c "pip install pip-audit && find ./services -name 'requirements.txt' -exec pip-audit -r {} \\;"
-    networks:
-      - private
-    profiles:
-      - security
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - '443:443'
+      - '80:80'
+    secrets:
+      - source: nginx-cert
+        target: /etc/nginx/ssl/cert.pem
+      - source: nginx-key
+        target: /etc/nginx/ssl/key.pem
+
+
 
 secrets:
   player-cert:
@@ -262,14 +200,6 @@ secrets:
     file: ./certs/gacha-cert.pem
   gacha-key:
     file: ./certs/gacha-key.pem
-  gateway-cert:
-    file: ./certs/gateway-cert.pem
-  gateway-key:
-    file: ./certs/gateway-key.pem
-  admin-gateway-cert:
-    file: ./certs/admin-gateway-cert.pem
-  admin-gateway-key:
-    file: ./certs/admin-gateway-key.pem
   auth-cert:
     file: ./certs/auth-cert.pem
   auth-key:
@@ -278,6 +208,10 @@ secrets:
     file: ./secrets/jwt-public-key.pub
   jwt-private-key:
     file: ./secrets/jwt-private-key.pem
+  nginx-cert:
+    file: ./certs/nginx-cert.pem
+  nginx-key:
+    file: ./certs/nginx-key.pem
 
 volumes:
   ase-player-db:
@@ -285,8 +219,50 @@ volumes:
   ase-gacha-db:
   ase-auth-db:
 
-networks:
-  private:
-    driver: bridge
-  public:
-    driver: bridge
+
+
+# api-gateway:
+#   hostname: ${API_GATEWAY_HOST}
+#   build:
+#     context: .
+#     dockerfile: ./services/Gateway/Dockerfile
+#   depends_on:
+#     - player
+#     - auction
+#     - auth
+#     - gacha
+#   ports:
+#     - '5000:5000'
+#   env_file: .env
+#   secrets:
+#     - source: gateway-cert
+#       target: cert
+#     - source: gateway-key
+#       target: key
+#   healthcheck:
+#     test: curl -f https://${PLAYER_HOST}:5000 && curl -f https://${AUCTION_HOST}:5000
+#     interval: 10s
+#     retries: 10
+#     start_period: 30s
+#     timeout: 10s
+#   networks:
+#     - public
+#     - private
+
+# api-gateway-admin:
+#   hostname: ${API_GATEWAY_ADMIN_HOST}
+#   build: ./services/AdminGateway
+#   depends_on:
+#     - auth
+#     - gacha
+#   restart: always
+#   ports:
+#     - "5001:5001"
+#   env_file: .env
+#   secrets:
+#     - source: admin-gateway-cert
+#       target: cert
+#     - source: admin-gateway-key
+#       target: key
+#   networks:
+#     - private
