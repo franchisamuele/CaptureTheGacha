@@ -1,8 +1,6 @@
-# Capture the Gacha
+# Capture the Gacha (DEPRECATED DOCS)
 
 **Advanced Software Engineering (Lab) – 2024/2025**
-
-*Lorenzo Bandini, Samuele Franchi, Luca Cordisco*
 
 ---
 
