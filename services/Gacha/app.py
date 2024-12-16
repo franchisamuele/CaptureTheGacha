@@ -130,7 +130,7 @@ async def delete_gacha(gacha_id: int, token: TokenDep, session: SessionDep):
         raise HTTPException(status_code=404, detail='Gacha not found')
     
     # Delete all gachas from users collections
-    response = httpx.delete(f'https://{PLAYER_HOST}:{PORT}/{gacha_id}', verify=False, timeout=TIMEOUT)
+    response = httpx.delete(f'https://{PLAYER_HOST}:{PORT}/collections/{gacha_id}', verify=False, timeout=TIMEOUT)
     if not response.is_success:
         raise HTTPException(status_code=400, detail='Error deleting gacha from users collections')
 
