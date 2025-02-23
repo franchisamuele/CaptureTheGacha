@@ -7,6 +7,7 @@ from typing import List, Annotated
 from sqlmodel import select
 from fastapi.security import OAuth2PasswordBearer
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+from fastapi.middleware.cors import CORSMiddleware
 
 # Set to 'test' for unit testing
 ENV = os.getenv('ENV', 'prod')
@@ -45,6 +46,15 @@ async def lifespan(_app: FastAPI):
 	yield
 
 app = FastAPI(lifespan=lifespan)
+
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 @app.get('/collection')
 async def get_collection(session: SessionDep, token: TokenDep) -> List[CollectionPublic]:

@@ -6,7 +6,7 @@ Catching gacha for fun
 
 ### Set up Environment
 
-Rename `.env.example` to `.env` and change the values as needed.
+Rename `.env.example` to `.env` in the root folder and in the frontend folder and change the values as needed.
 
 ### Create HTTPS certificates & JWT Secrets
 

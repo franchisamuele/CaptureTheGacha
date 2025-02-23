@@ -9,6 +9,7 @@ from connection import engine
 from fastapi.security import OAuth2PasswordBearer
 from fastapi_utils.tasks import repeat_every
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+from fastapi.middleware.cors import CORSMiddleware
 
 # Set to 'test' for unit testing
 ENV = os.getenv('ENV', 'prod')
@@ -49,6 +50,15 @@ async def lifespan(_app: FastAPI):
 	yield
 
 app = FastAPI(lifespan=lifespan)
+
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 def validate(token: str) -> dict:
 	try:

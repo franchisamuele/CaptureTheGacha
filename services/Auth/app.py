@@ -7,6 +7,7 @@ from typing import Annotated
 from contextlib import asynccontextmanager
 from model import User, UserCredentials, PatchUser, create_db_and_tables, SessionDep
 from sqlmodel import select
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
@@ -43,6 +44,15 @@ async def lifespan(_app: FastAPI):
 	yield
 
 app = FastAPI(lifespan=lifespan)
+
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 def validate(token: str) -> dict:
 	try:

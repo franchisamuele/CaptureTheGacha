@@ -10,6 +10,7 @@ from model import Gacha, SessionDep, create_db_and_tables
 from PIL import Image
 from sqlmodel import select
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+from fastapi.middleware.cors import CORSMiddleware
 
 ENV = os.getenv('ENV', 'prod')
 MOCK_ID = 1
@@ -60,6 +61,15 @@ async def lifespan(_app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan)
+
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
