@@ -24,8 +24,22 @@ docker compose up -d --build
 
 ### Access the endpoints
 
-- Main Features: Navigate to https://localhost:5000/docs to explore and interact with the API documentation for the application's main features.
-- Admin Features: Access the admin-specific functionalities at https://localhost:5001/docs.
+Install npm dependencies:
+
+```bash
+cd frontend
+npm install
+cd -
+```
+
+Run the frontend:
+
+```bash
+cd frontend
+npm start
+```
+
+Open the browser and navigate to https://localhost:3000
 
 ## Testing
 
