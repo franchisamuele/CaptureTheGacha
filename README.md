@@ -1,6 +1,9 @@
 # gacha-world
 
-Catching gacha for fun
+Catching gachas for fun  
+See the [API documentation](docs/README.md) for more information.
+
+![Frontend](docs/images/frontend_showcase.png)
 
 ## Usage
 
@@ -24,6 +27,11 @@ docker compose up -d --build
 
 ### Access the endpoints
 
+By default, APIs are served on https://localhost.  
+See the [API documentation](docs/README.md) for more information.
+
+### Mock frontend
+
 Install npm dependencies:
 
 ```bash
@@ -40,6 +48,8 @@ npm start
 ```
 
 Open the browser and navigate to https://localhost:3000
+
+> **Warning:** Certificates are self-signed and not trusted by the browser. You need to manually navigate to https://localhost and trust the certificates as prompted, otherwise the authentication will not work.
 
 ## Testing
 
@@ -103,8 +113,12 @@ cd -
 
 ### Security Testing
 
-Run `bandit` and `pip-audit` using `docker-compose`:
+Run the security tests:
 
 ```bash
-# TODO
+# Test 1: Check for vulnerabilities in python code
+pip install bandit && bandit -r ./services
+
+# Test 2: Check for vulnerabilities in python dependencies
+sh -c "pip install pip-audit && find ./services -name 'requirements.txt' -exec pip-audit -r {} \\;"
 ```
