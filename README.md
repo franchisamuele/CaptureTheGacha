@@ -11,6 +11,11 @@ See the [API documentation](docs/README.md) for more information.
 
 Rename `.env.example` to `.env` in the root folder and in the frontend folder and change the values as needed.
 
+```bash
+cp .env.example .env
+cp frontend/.env.example frontend/.env
+```
+
 ### Create HTTPS certificates & JWT Secrets
 
 Create self-signed certificates + private and public key for JWT:
